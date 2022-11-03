@@ -12,3 +12,8 @@
 	path = OCA/bank-statement-import
 	url = git@github.com:OCA/bank-statement-import.git
 	branch = 14.0
+
+[submodule "OCA/l10n-italy"]
+	path = OCA/l10n-italy
+	url = git@github.com:OCA/l10n-italy.git
+	branch = 14.0
