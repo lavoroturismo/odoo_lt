@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- FORM -->
+    <record id="lavtur_hr_applicant_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.applicant.inherit.lavtur</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="geo_recruitment.hr_applicant_inherit_form_view1"></field>
+        <field name="arch" type="xml">
+            <field name="partner_phone" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="type_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="categ_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="skill_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="experience" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//label[@for='name']" position="attributes">
+                <attribute name='invisible'>1</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name='invisible'>1</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='description']" position="attributes">
+                <attribute name='string'>Disponibilità</attribute> 
+                <attribute name='placeholder'></attribute> 
+            </xpath>
+            <field name="partner_name" position="attributes">
+                <attribute name="required">True</attribute>
+            </field>
+            <xpath expr="//field[@name='partner_name']" position="after">
+                <label for="partner_surname" class="oe_edit_only" modifiers="{}"/>
+                <field name="partner_surname" />
+            </xpath>
+            <xpath expr="//field[@name='type_id']" position="after">
+                <field name="data_nascita" />
+                <field name="age" />
+                <field name="ultimo_contatto" />
+            </xpath>
+            <xpath expr="//field[@name='priority']" position="replace">
+                <field name="valutazione" />
+            </xpath>
+            <xpath expr="//field[@name='valutazione']" position="after">
+                <field name="affidabilita" />
+            </xpath>
+            <xpath expr="//form/sheet/group[1]/group[4]" position="attributes">
+                <attribute name='invisible'>1</attribute> 
+            </xpath>
+            <xpath expr="//form/sheet/group[1]/group[5]" position="attributes">
+                <attribute name='invisible'>1</attribute> 
+            </xpath>
+            <xpath expr="//form/sheet/group[1]/group[4]" position="after">
+                <group string="Valutazioni">
+                    <field name="valutazioni_interne"/>
+                    <field name="valutazione_finale"/>
+                    <field name="referenze" placeholder="Referenze" />
+                    <field name="feedback_aziende"/>
+                </group>
+            </xpath>
+            <!-- <xpath expr="//form/sheet/group[1]/group[5]" position="after">
+                <group string="Preferenze">
+                    <field name="preferenze_esigenze" placeholder="Tipo di Azienda, contratto, mansione/ruolo, esigenze personali (alloggio, turni lavoro, GL...)" />
+                </group>
+            </xpath> -->
+            <xpath expr="//notebook//page[1]" position="before">
+                <!-- <page string="Preferenze e Esigenze">
+                    <field name="preferenze_esigenze" placeholder="Tipo di Azienda, contratto, mansione/ruolo, esigenze personali (alloggio, turni lavoro, GL...)" />
+                </page> -->
+                <!-- <page string="Info Candidato">
+                    <field name="info_candidato" placeholder="Presenza, residenza, famiglia..." />
+                </page> -->
+                <!-- <page string="Info Lavoro">
+                    <field name="info_lavoro" placeholder="Disponibile da, cambia, perché..." />
+                </page> -->
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="before">
+                <field name="piazzato" />
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="replace">
+                <field name="mansione_ruolo" widget="many2many_tags" string="Qualifica"/>
+            </xpath>
+            <xpath expr="//field[@name='mansione_ruolo']" position="after">
+                <field name="preferenze_esigenze" placeholder="Tipo di Azienda, contratto, mansione/ruolo, esigenze personali (alloggio, turni lavoro, GL...)" />
+                <field name="city" string="Città" placeholder="" />
+                <field name="state_id" string="Provincia" placeholder="" />
+                <field name="description" position="move" />
+            </xpath>
+            <xpath expr="//notebook//page[2]" position="attributes">
+                <attribute name='invisible'>1</attribute> 
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
