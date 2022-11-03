@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- FORM -->
+    <record id="lavtur_res_partner_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.inherit.lavtur</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="geo_recruitment.res_partner_form_view_inherit"></field>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="referenti_interni_ids"
+                    widget="many2many_tags"
+                />
+            </field>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="placeholder">Ragione Sociale</attribute> 
+            </xpath>
+            <field name="name" position="before">
+                <field name="insegna" placeholder="Insegna" attrs="{ 'invisible': [ ( 'company_type', '=', 'person' ) ] }"/><br/>
+            </field>
+            <field name="skype_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="category_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="linkedin_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="sdi" placeholder="SDI" readonly="1"/>
+            </xpath>
+            <xpath expr="//form/sheet/group[1]/group[2]" position="after">
+                <group string="Info Azienda">
+                    <field name="comment" position="move"/>
+                    <field name="info_location" string="Info Location" placeholder="Informazioni sulla località"/>
+                    <field name="alloggio" string="Alloggio" placeholder="Info Alloggio"/>
+                </group>
+            </xpath>
+            <xpath expr="//notebook//page[5]" position="replace" /> 
+            <xpath expr="//notebook//page[2]" position='after'>
+                <!-- <page string="Location/Alloggi" name="info_location">
+                    <group colspan="6">
+                        <field name="info_location" string="Info Location" placeholder="Informazioni sulla località"/>
+                    </group>
+                    <group colspan="6">
+                        <field name="alloggio" string="Alloggio" placeholder="Info Alloggio"/>
+                    </group>
+                </page> -->
+                <page string="L'Azienda" name="l_azienda">
+                    <group colspan="6">
+                        <field name="l_azienda" string="L'Azienda" placeholder="Informazioni generali sull'azienda"/>
+                    </group>
+                    <group colspan="6">
+                        <field name="azienda_personale" string="Azienda-Personale" placeholder="Collaborazioni, rapporti e contesto lavorativo"/>
+                    </group>
+                </page>
+                <page string="Punti Forza/Critici" name="forza_critici">
+                    <group colspan="6">
+                        <field name="punti_forza" string="Punti di Forza" placeholder=""/>
+                    </group>
+                    <group colspan="6">
+                        <field name="punti_critici" string="Punti Critici" placeholder=""/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

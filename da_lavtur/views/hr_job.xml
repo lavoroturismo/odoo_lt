@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- <template id="web_assets_backend_ext" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/da_lavtur/static/src/js/lib.js" />
+        </xpath>
+    </template> -->
+
+    <!-- FORM -->
+    <record id="res_partner_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.job.search.inherit</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"></field>
+        <field name="arch" type="xml">
+            <field name="job_type" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="expected_closing_date" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="user_ext_id" domain="[('share', '=', False)]" options="{'no_create':True,'no_open':True}" />
+            </xpath>
+            <xpath expr="//field[@name='job_type']" position="after">
+                <field name="contract_type_id" />
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="replace">
+                <field name="qualifica" required="True"/>
+            </xpath>
+            <xpath expr="//field[@name='qualifica']" position="after">
+                <field name="descrizione_qualifica" />
+            </xpath>
+            <xpath expr="//form/sheet/group[2]/group[2]" position="after">
+                <group>
+                    <!-- <field name="motivo_reclutamento" /> -->
+                    <field name="inizio_fine_impiego" />
+                    <field name="retribuzione" placeholder="Retribuzione e livello di assunzione"/>
+                    <field name="orari" placeholder="Orari lavoro, giorni liberi" />
+                </group>
+                <group>
+                    <!-- <field name="divisa" /> -->
+                    <field name="alloggio" />
+                    <!-- <field name="benefit" /> -->
+                    <field name="altro" />
+                </group>
+                <label for="compiti" style="font-weight: 700;">Descrizione Lavoro</label>
+                <field name="compiti" placeholder="Compiti, responsablità, organizzazione del lavoro" />
+                    <group>
+                        <h2>Profilo Ideale</h2>
+                        <field name="eta" />
+                        <field name="sesso" />
+                        <field name="residenza_domicilio" />
+                        <field name="formazione" />
+                        <field name="lingue" />
+                        <!-- <field name="auto_patente" /> -->
+                        <!-- <field name="requisiti" /> -->
+                        <!-- <field name="dati_quantitativi"/> -->
+                    </group>
+                    <group>
+                        <h2 style="color: #FFFFFF">- - -</h2>
+                        <!-- <field name="skills" placeholder="Soft skills, carattere, persona"/> -->
+                        <field name="punti_forza" placeholder="Elementi che rendono l'offerta di lavoro interessante" />
+                        <field name="punti_critici" placeholder="Elementi che possono rendere la ricerca difficoltosa" />
+                        <field name="situazione" placeholder="Situazione dell'attività di R&amp;S" />
+                        <field name="tipo_esperienze" />
+                        <!-- <field name="annuncio" /> -->
+                    </group>
+            </xpath>
+            <xpath expr="//notebook//page[1]" position="replace" />
+            <!-- <xpath expr="//notebook//page[1]" position="replace">
+                <page string="Descrizione">
+                    <field name="compiti" placeholder="Compiti, responsablità, organizzazione del lavoro" />
+                </page>
+            </xpath> -->
+            <!-- <xpath expr="//notebook//page[2]" position="after">
+                <page string="Profilo ideale" name="profilo_ideale">
+                    <group>
+                    <group>
+                        <field name="eta" />
+                        <field name="sesso" />
+                        <field name="residenza_domicilio" />
+                        <field name="formazione" />
+                        <field name="auto_patente" />
+                        <field name="requisiti" />
+                        <field name="dati_quantitativi"/>
+                        <field name="lingue" />
+                        <field name="tipo_esperienze" />
+                    </group>
+                    <group>
+                        <field name="skills" placeholder="Soft skills, carattere, persona"/>
+                        <field name="punti_forza" placeholder="Elementi che rendono l'offerta di lavoro interessante" />
+                        <field name="punti_critici" placeholder="Elementi che possono rendere la ricerca difficoltosa" />
+                        <field name="situazione" placeholder="Situazione dell'attività di R&amp;S" />
+                        <field name="annuncio" />
+                    </group>
+                    </group>
+                </page>
+            </xpath> -->
+        </field>
+    </record>
+
+</odoo>
+
