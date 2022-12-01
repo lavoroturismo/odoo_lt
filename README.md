@@ -1,1 +1,1 @@
-# odoo_lt
+# Repo Odoo - SOluzione Lavoro Turismo V14
