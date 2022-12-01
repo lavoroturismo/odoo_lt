@@ -42,7 +42,7 @@ class HrJob(models.Model):
     #     related='address_home_id.state_id', string="State", readonly=False, related_sudo=False,
     #     domain="[('country_id', '=?', country_id)]")
     state_code = fields.Char(related='state_id.code')
-    job_type = fields.Selection([('full_time', 'Full Time'), ('part_time', 'Part Time')], 'Job Type', required=1, default="full_time")
+    job_type = fields.Selection([('full_time', 'Full Time'), ('part_time', 'Part Time')], 'Job Type', required=1)
     is_hot_job = fields.Boolean(string='Is Hot Job')
     state = fields.Selection([
         ('draft','Draft'),
