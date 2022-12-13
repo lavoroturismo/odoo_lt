@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <kanban default_group_by="stage_id"  class="o_kanban_small_column o_opportunity_kanban" archivable="false" sample="1">
                 <field name="name"/>
+                <field name="address_id" string="Client"/>
                 <field name="alias_name"/>
                 <field name="alias_domain"/>
                 <field name="is_favorite"/>
@@ -57,6 +58,16 @@
                                                 <span title="Link Trackers"><i class="fa fa-lg fa-envelope" role="img" aria-label="Link Trackers"/></span>
                                             </a>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_card_manage_pane dropdown-menu" role="menu" invisible="1">
+                                    <div class="o_kanban_card_manage_section">
+                                        <div role="menuitem"><a t-if="record.state.raw_value == 'recruit'" name="set_open" type="object">Recruitment Done</a></div>
+                                        <div role="menuitem"><a t-if="record.state.raw_value == 'open'" name="set_recruit" type="object">Start recruitment</a></div>
+                                        <div role="menuitem"><a t-if="widget.editable" name="edit_job" type="edit">Edit</a></div>
+                                    </div>
+                                    <div role="menuitem" aria-haspopup="true">
+                                        <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
                                     </div>
                                 </div>
 
@@ -297,9 +308,12 @@
         <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form//sheet//group//group[3]//field[@name='job_id']" position="replace">
+                <field name="job_id" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='department_id']" position="after">
                 <field name="experience"/>
+<!--                <field name="survey_id" invisible="1"/>-->
+<!--                <field name="response_id" invisible="1"/>-->
             </xpath>
 
 

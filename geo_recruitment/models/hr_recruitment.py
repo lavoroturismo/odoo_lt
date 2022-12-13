@@ -503,6 +503,9 @@ class JobApplicant(models.Model):
                                group_expand='_read_group_stage_ids',
                                default=_default_stage_id)
     job_id = fields.Many2one('hr.job',string='Job Position')
+    # survey_id = fields.Many2one('survey.survey', string="Survey", readonly=True)
+    # response_id = fields.Many2one('survey.user_input', "Response", ondelete="set null")
+
 
 
     def action_makeMeeting(self):

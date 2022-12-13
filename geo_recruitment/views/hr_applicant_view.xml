@@ -90,19 +90,19 @@
             </xpath>
         </field>
     </record>
-    <record id="view_hr_job_kanban_inherit" model="ir.ui.view">
-        <field name="name">view_hr_job_kanban</field>
-        <field name="model">hr.job</field>
-        <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='name']" position="attributes">
-                <field name="address_id" string="Client"/>
-            </xpath>
-<!--            <xpath expr="//div[@class='col-12 text-muted']" position="inside">-->
+<!--    <record id="view_hr_job_kanban_inherit" model="ir.ui.view">-->
+<!--        <field name="name">view_hr_job_kanban</field>-->
+<!--        <field name="model">hr.job</field>-->
+<!--        <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='name']" position="attributes">-->
 <!--                <field name="address_id" string="Client"/>-->
 <!--            </xpath>-->
-        </field>
-    </record>
+<!--&lt;!&ndash;            <xpath expr="//div[@class='col-12 text-muted']" position="inside">&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="address_id" string="Client"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            </xpath>&ndash;&gt;-->
+<!--        </field>-->
+<!--    </record>-->
 <!--    >-->
     <record id="view_job_filter_inherit" model="ir.ui.view">
         <field name="name">hr.job.search</field>
