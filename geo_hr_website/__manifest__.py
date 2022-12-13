@@ -1,10 +1,10 @@
 {
-    'name': 'Hr Recruitment Wensite',
-    'version': '15.0.1.1.1',
+    'name': 'Hr Recruitment Website',
+    'version': '14.0.1.1.1',
     'summary': """Employee Document""",
     'description': """Employee Document""",
     'author': 'Geotechnosoft',
-    'depends': ['base', 'hr_recruitment','mail','website_hr_recruitment','geo_recruitment','hr_recruitment_survey'],
+    'depends': ['base', 'hr_recruitment','mail','website_hr_recruitment','geo_recruitment'],
     # 'assets': {
     #           "web.assets_backend": [
     #                 "odoo_web_login/static/src/css/web_login_style.css"
