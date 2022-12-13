@@ -83,6 +83,44 @@
 <!--                                    attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}">-->
 <!--                                    <span class="bg-danger">Lost</span>-->
 <!--                                </div>-->
+                                <div class="o_kanban_card_header" invisible="1">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary col-12">
+                                            <span><t t-esc="record.name.value"/></span>
+                                        </div>
+                                        <div class="o_kanban_record_subtitle col-12 text-muted">
+                                            <field name="user_id" />
+                                        </div>
+                                        <field name="is_favorite" widget="boolean_favorite" nolabel="1"/>
+                                        <div t-if="record.alias_name.value and record.alias_domain.value and record.state.raw_value == 'recruit'" class="o_secondary o_job_alias">
+                                            <small> <i class="fa fa-envelope-o" role="img" aria-label="Alias" title="Alias"></i> <field name="alias_id"/> </small>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                    </div>
+                                </div>
+                                <div name="kanban_boxes" class="row o_recruitment_kanban_boxes" invisible="1">
+                                    <div class="o_recruitment_kanban_box o_kanban_primary_bottom bottom_block" style="padding-left:8px;">
+                                        <div class="col-6"></div>
+                                        <div class="col-6 o_link_trackers">
+                                            <a role="button" name="%(hr_recruitment.action_hr_job_sources)d" type="action" class="btn btn-sm ">
+                                                <span title="Link Trackers"><i class="fa fa-lg fa-envelope" role="img" aria-label="Link Trackers"/></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_card_manage_pane dropdown-menu" role="menu" invisible="1">
+                                    <div class="o_kanban_card_manage_section">
+                                        <div role="menuitem"><a t-if="record.state.raw_value == 'recruit'" name="set_open" type="object">Recruitment Done</a></div>
+                                        <div role="menuitem"><a t-if="record.state.raw_value == 'open'" name="set_recruit" type="object">Start recruitment</a></div>
+                                        <div role="menuitem"><a t-if="widget.editable" name="edit_job" type="edit">Edit</a></div>
+                                    </div>
+                                    <div role="menuitem" aria-haspopup="true">
+                                        <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                    </div>
+                                </div>
+
                                 <div class="o_kanban_card_manage_pane dropdown-menu" role="menu" invisible="1">
                                     <div class="o_kanban_card_manage_section">
                                         <div role="menuitem"><a t-if="record.state.raw_value == 'recruit'" name="set_open" type="object">Recruitment Done</a></div>

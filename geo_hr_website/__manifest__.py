@@ -4,7 +4,7 @@
     'summary': """Employee Document""",
     'description': """Employee Document""",
     'author': 'Geotechnosoft',
-    'depends': ['base', 'hr_recruitment','mail','website_hr_recruitment','geo_recruitment'],
+    'depends': ['base', 'hr_recruitment','mail','geo_recruitment','website_hr_recruitment'],
     # 'assets': {
     #           "web.assets_backend": [
     #                 "odoo_web_login/static/src/css/web_login_style.css"
