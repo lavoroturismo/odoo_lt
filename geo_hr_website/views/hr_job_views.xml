@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="website_hr_recruitment.hr_job_website_inherit" model="ir.ui.view">-->
+<!--        <field name="name">hr.job.form.inherit</field>-->
+<!--        <field name="model">hr.job</field>-->
+<!--        <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//div[hasclass('o_dropdown_kanban')]" position="before">-->
+<!--                <field name="website_published" invisible="1"/>-->
+<!--                <div class="ribbon ribbon-top-right" style="margin-top:-8px;" attrs="{'invisible': [('website_published', '=', False)]}">-->
+<!--                    <span class="bg-info" style="height:26px;padding-left: 90px;top:7px;font-size: 15px;">Published</span>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="before">-->
+<!--                <div class="oe_kanban_bottom_left">-->
+<!--                    <field name="website_url" invisible="1"/>-->
+<!--                    <span><t t-if="record.no_of_recruitment.raw_value != 0">-->
+<!--&lt;!&ndash;                                                <span class="inline">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <t t-if="record.is_published.raw_value">Published</t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <t t-else="">Not published</t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </span>&ndash;&gt;-->
+<!--                        <field name="is_published" widget='boolean_toggle'/></t>-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="after">-->
+<!--                <div class="oe_kanban_bottom_right">-->
+<!--                    <div class="o_link_trackers col-6">-->
+<!--                        <a role="button" name="%(hr_recruitment.action_hr_job_sources)d" type="action" class="btn btn-sm py-0">-->
+<!--                            <span title='Link Trackers'><i class='fa fa-lg fa-link' role="img" aria-label="Link Trackers"/></span>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="website_hr_recruitment.hr_job_website_inherit" model="ir.ui.view">-->
+<!--        <field name="name">hr.job.form.inherit</field>-->
+<!--        <field name="model">hr.job</field>-->
+<!--        <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//div[hasclass('o_kanban_record_title')]" position="replace">-->
+<!--                <field name="website_url" invisible="1"/>-->
+<!--                <div class="o_kanban_record_title oe_kanban_details o_text_overflow">-->
+<!--                    <span><a t-attf-href="#{record.website_url.raw_value}" class="mr-2">-->
+<!--                        <strong><t t-esc="record.name.value"/></strong></a>-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="hr_recruitment.view_hr_job_kanban" model="ir.ui.view">
+        <field name="name">hr.job.kanban</field>
+        <field name="model">hr.job</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id"  class="o_kanban_small_column o_opportunity_kanban" archivable="false" sample="1">
+                <field name="name"/>
+                <field name="alias_name"/>
+                <field name="alias_domain"/>
+                <field name="is_favorite"/>
+                <field name="department_id"/>
+                <field name="no_of_recruitment"/>
+                <field name="address_id"/>
+                <field name="hired_count"/>
+                <field name="color"/>
+                <field name="new_application_count"/>
+                <field name="no_of_hired_employee"/>
+                <field name="manager_id"/>
+                <field name="state"/>
+                <field name="user_id"/>
+                <field name="application_count"/>
+                <field name="activity_state" />
+                <field name="activity_ids" />
+                <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}' sum_field="no_of_recruitment" help="This bar allows to filter the Job Position based on scheduled activities."/>
+                <templates>
+                    <t t-name="kanban-box">
+<!--                            <t t-set="lost_ribbon" t-value="!record.active.raw_value and record.probability and record.probability.raw_value == 0"/>-->
+                            <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''} oe_kanban_global_click oe_kanban_card d-flex flex-column">
+<!--                                <div class="ribbon ribbon-top-right"-->
+<!--                                    attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}">-->
+<!--                                    <span class="bg-danger">Lost</span>-->
+<!--                                </div>-->
+                                <div class="o_kanban_card_manage_pane dropdown-menu" role="menu" invisible="1">
+                                    <div class="o_kanban_card_manage_section">
+                                        <div role="menuitem"><a t-if="record.state.raw_value == 'recruit'" name="set_open" type="object">Recruitment Done</a></div>
+                                        <div role="menuitem"><a t-if="record.state.raw_value == 'open'" name="set_recruit" type="object">Start recruitment</a></div>
+                                        <div role="menuitem"><a t-if="widget.editable" name="edit_job" type="edit">Edit</a></div>
+                                    </div>
+                                    <div role="menuitem" aria-haspopup="true">
+                                        <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                    </div>
+                                </div>
+                                <field name="website_published" invisible="1"/>
+                                <div class="ribbon ribbon-top-right" style="margin-top:-8px;" attrs="{'invisible': [('website_published', '=', False)]}">
+                                    <span class="bg-info" style="height:26px;padding-left: 90px;top:7px;font-size: 15px;">Published</span>
+                                </div>
+
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                        <t t-if="record.survey_id.raw_value"><a role="menuitem" type="object" name="action_print_survey" class="dropdown-item">Preview Interview</a></t>
+                                        <t t-if="!record.survey_id.raw_value"><a role="menuitem" type="object" name="action_new_survey" class="dropdown-item">Create Interview Form</a></t>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_content flex-grow-1">
+                                    <div class="o_kanban_record_title oe_kanban_details o_text_overflow">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div class="o_kanban_record_subtitle">
+                                        <t t-if="record.address_id">
+                                            <span class="fa fa-user mr-2" aria-label="Partner" title="Partner"/><field name="address_id"/>
+                                        </t>
+                                    </div>
+                                    <div class="o_kanban_record_subtitle">
+                                        <t t-if="record.no_of_recruitment">
+                                            <field name="no_of_recruitment"/> To Recruit
+                                        </t>
+                                        <span style="color:red;font-size:15px;" t-if="record.expected_closing_date.value"> &#8680; </span>
+                                        <t t-if="record.expected_closing_date">
+                                            <field name="expected_closing_date"/>
+                                        </t>
+                                    </div>
+                                    <div class="ml16">
+                                        <a name="action_view_applicant_from" type="object">
+                                            <span><t t-esc="record.application_count.value"/></span>
+                                            <span>Applications</span>
+                                        </a>
+                                    </div>
+                                    <div class="ml16">
+                                        <a name="action_view_hire_form" type="object">
+                                            <span><t t-esc="record.hired_count.value"/></span>
+                                            <span>Hired</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_footer">
+                                    <div class="o_kanban_record_bottom bottom_block o_recruitment_kanban_boxes">
+                                        <div class="oe_kanban_bottom_left">
+                                            <field name="website_url" invisible="1"/>
+                                            <span><t t-if="record.no_of_recruitment.raw_value != 0">
+<!--                                                <span class="inline">-->
+<!--                                                    <t t-if="record.is_published.raw_value">Published</t>-->
+<!--                                                    <t t-else="">Not published</t>-->
+<!--                                                </span>-->
+                                                <field name="is_published" widget='boolean_toggle'/></t>
+                                            </span>
+                                        </div>
+                                        <div class="oe_kanban_bottom_left">
+                                            <field name="is_favorite" widget="boolean_favorite" nolabel="1"/>
+                                            <field name="activity_ids" widget="kanban_activity"/>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <div class="o_link_trackers col-6">
+                                                <a role="button" name="%(hr_recruitment.action_hr_job_sources)d" type="action" class="btn btn-sm py-0">
+                                                    <span title='Link Trackers'><i class='fa fa-lg fa-link' role="img" aria-label="Link Trackers"/></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <field name="user_id" widget="many2one_avatar_user"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"/>
+                            </div>
+                        </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="website_hr_recruitment.hr_job_website_inherit" model="ir.ui.view">
+        <field name="name">hr.job.form.inherit</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_record_title')]" position="replace">
+                <field name="website_url" invisible="1"/>
+                <div class="o_kanban_record_title oe_kanban_details o_text_overflow">
+                    <span><a t-attf-href="#{record.website_url.raw_value}" class="mr-2">
+                        <strong><t t-esc="record.name.value"/></strong></a>
+                    </span>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_hr_job_form_inherited1" model="ir.ui.view">
+        <field name="name">hr.job.form.inherit1</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//header//button[@name='set_recruit']" position="after">
+                <button name="set_publish" string="Publish"  type="object" class="oe_highlight" attrs="{'invisible': [('is_published', '=', True)]}"/>
+                <button name="set_unpublish" string="Unpublish"  type="object" class="oe_highlight" attrs="{'invisible': [('is_published', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
